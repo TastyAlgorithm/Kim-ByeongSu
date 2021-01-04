@@ -46,6 +46,7 @@ int main(void) {
 				}
 			}
 		}
+		// 블록이 들어갈 수 있는 칸의 수가 3의 배수가 아니면 정답이 존재할 수 없음.
 		if (count % 3 == 0)
 			answer[i] = solve();
 		else
@@ -61,14 +62,17 @@ int main(void) {
 int solve() {
 	int x = -1, y = -1;
 
+	// 좌측 상단에서부터 빈칸을 찾아감
 	for (int i = 1; i < H + 1; i++) {
 		for (int j = 1; j < W + 1; j++) {
+			// 빈칸을 찾으면 for loop break #1
 			if (board[i][j]) {
 				x = i;
 				y = j;
 				break;
 			}
 		}
+		// 빈칸을 찾으면 for loop break #2
 		if (x != -1)
 			break;
 	}
@@ -79,6 +83,7 @@ int solve() {
 	}
 
 	int ret = 0;
+	// 3개의 블록으로 만들 수 있는 모든 경우의 수(4개)에 대하여 각각의 경우가 들어갈 수 있는지 체크하고, 가능한 경우에는 
 	for (int type = 0; type < 4; type++) {
 		if (check(x, y, type)) {
 			for (int i = 0; i < 3; i++) {
