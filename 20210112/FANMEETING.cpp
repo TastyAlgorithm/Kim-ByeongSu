@@ -1,3 +1,7 @@
+/*
+	url: https://algospot.com/judge/problem/read/FANMEETING
+*/
+
 #include<iostream>
 #include<vector>
 #include<string>
