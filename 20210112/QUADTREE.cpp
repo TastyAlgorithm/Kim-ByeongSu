@@ -232,10 +232,9 @@ string QuadTree::_Insert(CNode * node, string input)
 
 void QuadTree::Reverse()
 {
-	/*if (this->root->getLT() != nullptr && this->root->getLB() != nullptr)*/
-		_Reverse(this->root->getLT(), this->root->getLB());
-	/*if (this->root->getRT() != nullptr && this->root->getRB() != nullptr)*/
-		_Reverse(this->root->getRT(), this->root->getRB());
+	_Reverse(this->root->getLT(), this->root->getLB());
+	
+	_Reverse(this->root->getRT(), this->root->getRB());
 }
 
 void QuadTree::_Reverse(CNode ** up, CNode ** down)
