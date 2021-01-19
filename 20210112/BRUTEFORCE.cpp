@@ -48,7 +48,7 @@ int BRUTEFORCE(int min, int max, int N) {
 	= (3^1 + 3^2 + 3^3 + 3^4) x (1 + 3^4) +3^9 가 되므로
 	
 	calculate(base, 2a+1) = calculate(base, 2a) + base^(2a+1) 
-	calculate(base, 2a) = calculate(base, 2) x (1 + base^a) 가 된다.
+	calculate(base, 2a) = calculate(base, a) x (1 + base^a) 가 된다.
 */
 long long calculate(int base, int length) {
 	// 기저 사례 처리
