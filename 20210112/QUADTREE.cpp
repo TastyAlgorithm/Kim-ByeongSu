@@ -165,6 +165,7 @@ string QuadTree::_Insert(CNode * node, string input)
 		return "";
 
 	int diff = 0;
+	// input 의 길이가 4의 배수가 아닌 경우 -> input 에 'x' 가 한 개 이상 존재하는 경우
 	if (!(input.size() / 4))
 	{
 		for (int i = 0; i < input.size() % 4; i++)
@@ -189,11 +190,18 @@ string QuadTree::_Insert(CNode * node, string input)
 
 			if (insert->getKey() == 'x')
 			{
+				/* 
+				_Insert() 함수를 재귀 호출 할 때마다 input 이 변경되기 때문에 인덱스를 맞춰주기 위해서 diff 라는 변수를 사용함
+				ex)
+				input = "wwwxwwbbb" 라고 할 때, input[3] = 'x' 이기 때문에 재귀호출을 수행하게 되고,
+				
+				*/
 				input = _Insert(insert, input.substr(i + 1 - diff));
 				diff = i + 1;
 			}
 		}
 	}
+	// input 의 길이가 4의 배수인 경우 -> input 에 'x' 가 존재하지 않는 경우
 	else
 	{
 		for (int i = 0; i < 4; i++)
