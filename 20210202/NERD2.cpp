@@ -1,7 +1,5 @@
 /*
   url: https://algospot.com/judge/problem/read/NERD2
-  
-  map 을 이용하여 해결함.
 */
 
 #include<iostream>
