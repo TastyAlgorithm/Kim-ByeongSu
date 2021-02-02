@@ -3,51 +3,47 @@
 
 using namespace std;
 
-int JUMPGAME(vector<vector<int>>& map, int x, int y);
+int JUMPGAME(int x, int y);
 
+vector<vector<int>> map;
 int cache[100][100];
 
 int main(void) {
 	int C;
 	cin >> C;
-	vector<vector<int>> map;
-	vector<int> answer;
+	vector<int> answer(C);
 
-	for (int tc = 0; tc < C; tc++) {
-		map.clear();
-		fill(&cache[0][0], &cache[99][99], -1);
+	for (int i = 0; i < C; i++) {
+		int N;
+		cin >> N;
 
-		int n;
-		cin >> n;
-
-		for (int i = 0; i < n; i++) {
-			vector<int> line(n);
-			for (int j = 0; j < n; j++)
-				cin >> line[j];
-			map.push_back(line);
+		fill(&cache[0][0], &cache[99][100], -1);
+		map = vector<vector<int>>(N, vector<int>(N));
+		for (int j = 0; j < N; j++) {
+			for (int k = 0; k < N; k++) {
+				cin >> map[j][k];
+			}
 		}
 
-		answer.push_back(JUMPGAME(map, 0, 0));
+		answer[i] = JUMPGAME(0, 0);
 	}
 
-	for (int i = 0; i < answer.size(); i++) {
-		if (answer[i] == 1)
-			cout << "YES" << endl;
-		else
-			cout << "NO" << endl;
+	for (int output : answer) {
+		cout << (output ? "YES" : "NO") << endl;
 	}
 
 	return 0;
 }
 
-int JUMPGAME(vector<vector<int>>& map, int x, int y) {
-	if (x >= map.size() || y >= map.size())     return 0;
+// (N-1, N-1) 로 이동하는 경로가 하나라도 존재하는 경우 양수를 리턴, 그렇지 않은 경우에는 0을 리턴
+int JUMPGAME(int x, int y) {
+	// 기저 사례 처리
+	if (x >= map.size() || y >= map.size())			return 0;
 
-	if (x == map.size() - 1 && y == map.size() - 1)     return 1;
+	if (x == map.size() - 1 && y == map.size() - 1)			return 1;
 
 	int& ret = cache[y][x];
-	
-	if (ret != -1)      return ret;
+	if (ret != -1)			return ret;
 
-	return ret = (JUMPGAME(map, x + map[y][x], y) || JUMPGAME(map, x, y + map[y][x]));
+	return ret = JUMPGAME(x + map[y][x], y) + JUMPGAME(x, y + map[y][x]);
 }
