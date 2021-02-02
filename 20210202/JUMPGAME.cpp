@@ -1,3 +1,7 @@
+/*
+	url: https://algospot.com/judge/problem/read/JUMPGAME
+*/
+
 #include<iostream>
 #include<vector>
 
